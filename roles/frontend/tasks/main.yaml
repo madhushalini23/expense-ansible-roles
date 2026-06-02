@@ -25,12 +25,9 @@
     remote_src: yes
 
 - name: copy expense config
-  ansible.builtin.copy:
-    src: expense.conf
+  ansible.builtin.template:
+    src: expense.conf.j2
     dest: /etc/nginx/conf.d/expense.conf
+  notify: 
+  - restart nginx
 
-- name: restart nginx 
-  ansible.builtin.service:
-    name: nginx
-    state: restarted
-    enabled: yes
